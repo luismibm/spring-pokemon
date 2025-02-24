@@ -1,6 +1,7 @@
 package com.luismibm.springpokemon.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -13,7 +14,8 @@ public class Generation {
     private long generation_id;
     private String generation_name;
 
-    @OneToOne @JsonManagedReference
+    @OneToOne
+    @JsonIgnoreProperties("generation")
     private Region region;
 
     @OneToMany(mappedBy = "generation")
