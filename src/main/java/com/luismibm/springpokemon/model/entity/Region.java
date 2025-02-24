@@ -1,5 +1,6 @@
 package com.luismibm.springpokemon.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -12,8 +13,8 @@ public class Region {
     private long region_id;
     private String region_name;
 
-    @OneToOne(mappedBy = "region")
-    private Generation region;
+    @OneToOne(mappedBy = "region") @JsonBackReference
+    private Generation generation;
 
     public Region(){}
     public Region(long id, String name) {
@@ -37,12 +38,12 @@ public class Region {
         this.region_name = region_name;
     }
 
-    public Generation getRegion() {
-        return region;
+    public Generation getGeneration() {
+        return generation;
     }
 
-    public void setRegion(Generation region) {
-        this.region = region;
+    public void setGeneration(Generation generation) {
+        this.generation = generation;
     }
 
 }

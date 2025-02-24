@@ -1,5 +1,6 @@
 package com.luismibm.springpokemon.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,14 +14,15 @@ public class Starter {
 
     @ManyToOne
     @JoinColumn(name = "generation_id")
+    @JsonBackReference
     private Generation generation;
 
     @ManyToMany @JoinTable(
             name = "STARTER-TYPE",
-            joinColumns = @JoinColumn(name = "type_id"),
-            inverseJoinColumns = @JoinColumn(name = "starter_id")
+            joinColumns = @JoinColumn(name = "starter_id"),
+            inverseJoinColumns = @JoinColumn(name = "type_id")
     )
-    List<Type> types;
+    private List<Type> type;
 
     public Starter(){}
     public Starter(long id, String name) {
@@ -52,12 +54,12 @@ public class Starter {
         this.generation = generation;
     }
 
-    public List<Type> getTypes() {
-        return types;
+    public List<Type> getType() {
+        return type;
     }
 
-    public void setTypes(List<Type> types) {
-        this.types = types;
+    public void setType(List<Type> type) {
+        this.type = type;
     }
 
 }

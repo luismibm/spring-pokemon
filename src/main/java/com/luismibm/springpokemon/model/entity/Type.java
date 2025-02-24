@@ -1,5 +1,6 @@
 package com.luismibm.springpokemon.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class Type {
     private long type_id;
     private String type_name;
 
-    @ManyToMany(mappedBy = "types")
+    @ManyToMany(mappedBy = "type") @JsonBackReference
     private List<Starter> starter;
 
     public Type(){}

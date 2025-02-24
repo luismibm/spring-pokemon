@@ -1,5 +1,7 @@
 package com.luismibm.springpokemon.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,10 +13,11 @@ public class Generation {
     private long generation_id;
     private String generation_name;
 
-    @OneToOne
+    @OneToOne @JsonManagedReference
     private Region region;
 
     @OneToMany(mappedBy = "generation")
+    @JsonManagedReference
     private List<Starter> starters;
 
     public Generation(){}
