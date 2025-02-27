@@ -21,7 +21,7 @@ public class GenerationRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Generation> getGenerationById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Generation> getGenerationById(@PathVariable Long id) {
         Optional<Generation> g = generationRepository.findById(id);
         if (g.isPresent()) {
             return ResponseEntity.ok().body(g.get());
@@ -31,15 +31,15 @@ public class GenerationRestController {
     }
 
     @PostMapping
-    public Generation createGeneration(@RequestBody Generation g) {
-        return generationRepository.save(g);
+    public Generation createGeneration(@RequestBody Generation generation) {
+        return generationRepository.save(generation);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Generation> updateGeneration(@PathVariable Long id, @RequestBody Generation updatedGeneration) {
-        Optional<Generation> optionalGeneration = generationRepository.findById(id);
-        if (optionalGeneration.isPresent()) {
-            Generation generation = optionalGeneration.get();
+        Optional<Generation> g = generationRepository.findById(id);
+        if (g.isPresent()) {
+            Generation generation = g.get();
             generation.setGeneration_name(updatedGeneration.getGeneration_name());
             return ResponseEntity.ok().body(generationRepository.save(generation));
         } else {
